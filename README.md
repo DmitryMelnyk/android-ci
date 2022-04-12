@@ -1,3 +1,15 @@
+# Important notes
+
+Build on hub.docker.com includes public gradle dependencies from project repo and was build on based on this image
+
+For dependencies update please put gradle files to gradledir directory, build image with example below and push to hub.docker.com
+```
+FROM basip/android-ci:ubuntu20.04
+ADD gradledir /root/gradledir
+RUN chmod +x /root/gradledir/gradlew
+RUN cd /root/gradledir && ./gradlew dependencies --debug --scan
+```
+
 # Android CI [![Android CI on Docker Hub](https://img.shields.io/docker/automated/javiersantos/android-ci.svg)](https://store.docker.com/community/images/javiersantos/android-ci)
 ### Continous Integration (CI) for Android apps on GitLab / Bitbucket
 An image for building Android apps with support for multiple SDK Build Tools. This Docker image contains the Android SDK and most common packages necessary for building Android apps in a CI tool. Based on [jangrewe/gitlab-ci-android](https://github.com/jangrewe/gitlab-ci-android).
