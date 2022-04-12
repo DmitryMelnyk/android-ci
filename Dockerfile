@@ -47,6 +47,16 @@ RUN mkdir -p /root/.android && \
   touch /root/.android/repositories.cfg && \
   sdkmanager --update
 
+RUN apt update && apt install wget xz-utils make build-essential libssl-dev libffi-dev python3-dev -y
+
+RUN mkdir -p /root/ca-cert-update && \
+  wget https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/ca-certificates/20210119~20.04.2/ca-certificates_20210119~20.04.2.tar.xz -P /root/ca-cert-update && \
+  tar -xJf /root/ca-cert-update/ca-certificates_20210119~20.04.2.tar.xz -C /root/ca-cert-update && \
+  make -C /root/ca-cert-update/ca-certificates-20210119~20.04.1 && \
+  make install  -C /root/ca-cert-update/ca-certificates-20210119~20.04.1 && \
+  dpkg-reconfigure -fnoninteractive ca-certificates && \
+  update-ca-certificates
+
 ADD packages.txt /sdk
 RUN while read -r package; do PACKAGES="${PACKAGES}${package} "; done < /sdk/packages.txt && \
     sdkmanager ${PACKAGES}
