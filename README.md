@@ -11,8 +11,8 @@ image: javiersantos/android-ci:latest
 
 Includes the latest SDK Build Tools and SDK Platform.
 
-* Build Tools: 28.0.3
-* Platform: Android 25, 26, 27 & 28
+* Build Tools: 30.0.3
+* Platform: Android 28, 29, 30, 31, 32
 
 ### javiersantos/android-ci:28.0.3
 
